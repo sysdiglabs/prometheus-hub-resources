@@ -9,34 +9,31 @@ etcd cluster: insufficient members.
 etcd cluster: member has no leader.
 
 ## etcdHighNumberOfLeaderChanges
-etcd cluster: leader changes within the last 15 minutes. Frequent elections may be a sign of insufficient resources, high network latency, or disruptions by other components and should be investigated.
+etcd cluster: leader changes within the last 15 minutes. Frequent elections may be a sign of insufficient resources, high network latency, or disruptions by other components, and it should be investigated.
 
 ## etcdHighNumberOfFailedGRPCRequests
-etcd cluster: number of requests failed on etcd instance.
+etcd cluster: number of requests failed on the etcd instance.
 
 ## etcdHighNumberOfFailedGRPCRequests
-etcd cluster: number of requests failed on etcd instance.
+etcd cluster: number of requests failed on the etcd instance.
 
 ## etcdGRPCRequestsSlow
-etcd cluster: gRPC requests to are taking on etcd instance.
+etcd cluster: gRPC requests are too slow on the etcd instance.
 
 ## etcdMemberCommunicationSlow
-etcd cluster: member communication with is taking on etcd instance.
+etcd cluster: member communication with is slow on etcd instance.
 
 ## etcdHighNumberOfFailedProposals
-etcd cluster: proposal failures within the last 30 minutes on etcd instance.
+etcd cluster: Too many proposal failures within the last 30 minutes on etcd instance.
 
 ## etcdHighFsyncDurations
-etcd cluster: 99th percentile fync durations are on etcd instance.
+etcd cluster: 99th percentile fsync durations are too high on etcd instance.
 
 ## etcdHighCommitDurations
-etcd cluster: 99th percentile commit durations on etcd instance.
+etcd cluster: 99th percentile commit durations are too high on etcd instance.
 
 ## etcdHighNumberOfFailedHTTPRequests
-Number of requests failed on etcd instance
-
-## etcdHighNumberOfFailedHTTPRequests
-Number of requests for failed on etcd instance.
+High number of requests failures on etcd instance
 
 ## etcdHTTPRequestsSlow
-etcd instance HTTP requests to {{ $labels.method }} are slow.
+etcd instance HTTP requests are slow.
