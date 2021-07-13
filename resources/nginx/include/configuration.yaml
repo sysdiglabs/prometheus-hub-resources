@@ -12,6 +12,7 @@ spec:
       labels:
         app: nginx-A
       annotations:
+        promcat.sysdig.com/integration_type: nginx
         promcat.sysdig.com/port: "9113"
     spec:
       containers:

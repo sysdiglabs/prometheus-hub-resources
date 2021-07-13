@@ -13,12 +13,13 @@ spec:
       labels:
         app: redis-exporter
       annotations:
+        promcat.sysdig.com/integration_type: redis
         prometheus.io/scrape: "true"
         prometheus.io/port: "9121"
     spec:
       containers:
       - name: redis-exporter
-        image: oliver006/redis_exporter:latest
+        image: quay.io/sysdig/redis-exporter:latest
         ports:
           - containerPort: 9121
         env:

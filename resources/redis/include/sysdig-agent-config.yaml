@@ -1,4 +1,8 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdig-agent
+  namespace: sysdig-agent
 data:
   dragent.yaml: |
     new_k8s: true
@@ -35,41 +39,16 @@ data:
         regex: __HOSTIPS__
       - action: keep
         source_labels:
-        - __meta_kubernetes_namespace
-        - __meta_kubernetes_pod_name
-        separator: '/'
-
-        # Add here the namespace/pod-name of your redis exporter
-        regex: 'default/redis-exporter-.+'
-
+        - __meta_kubernetes_pod_annotation_promcat_sysdig_com_integration_type
+        regex: "redis"
       - action: replace
         source_labels: [__address__, __meta_kubernetes_pod_annotation_promcat_sysdig_com_port]
         regex: ([^:]+)(?::\d+)?;(\d+)
         replacement: $1:$2
         target_label: __address__
       - action: replace
-        source_labels: [__meta_kubernetes_pod_annotation_promcat_sysdig_com_target_ns]
-        target_label: kube_namespace_name
-      - action: replace
-        source_labels: [__meta_kubernetes_pod_annotation_promcat_sysdig_com_target_workload_type]
-        target_label: kube_workload_type
-      - action: replace
-        source_labels: [__meta_kubernetes_pod_annotation_promcat_sysdig_com_target_workload_name]
-        target_label: kube_workload_name
-      - action: replace
-        replacement: true
-        target_label: sysdig_omit_source
-      - action: replace
         source_labels: [__meta_kubernetes_pod_uid]
         target_label: sysdig_k8s_pod_uid
       - action: replace
         source_labels: [__meta_kubernetes_pod_container_name]
         target_label: sysdig_k8s_pod_container_name
-
-
-kind: ConfigMap
-metadata:
-    labels:
-      app: sysdig-agent
-    name: sysdig-agent
-    namespace: sysdig-agent

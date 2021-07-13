@@ -91,16 +91,6 @@ kubectl apply -f mongodb-exporter-auth-deploy.yaml
 # SYSDIG AGENT CONFIGURATION
 In the _values.yaml_ of the Helm chart, include the Prometheus annotations to configure the port of the exporter as the scraping port.    
 
-Also, ensure that the Sysdig Agent configuration has the following lines of configuration to scrape the containers with Prometheus annotations.
-```yaml
-process_filter:
-  - include:
-      kubernetes.pod.annotation.prometheus.io/scrape: true
-      conf:
-        path: "{kubernetes.pod.annotation.prometheus.io/path}"
-        port: "{kubernetes.pod.annotation.prometheus.io/port}"
-```
-
 You can download the sample configuration file and apply it by:
 ```bash
 kubectl apply -f sysdig-agent-config.yaml

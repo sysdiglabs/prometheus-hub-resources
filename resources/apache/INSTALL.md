@@ -79,17 +79,8 @@ kubectl apply -f apache-deploy.yaml
 
 # Configuring Sysdig Agent
 
-Download the sample [Sysdig Agent configuration file](include/sysdig-agent-config.yaml). In the configuration file, add the following code to include the 'app' label as a metric label.
-```yaml
-process_filter:
-  - include:
-      kubernetes.pod.annotation.prometheus.io/scrape: true
-      conf:
-        path: "{kubernetes.pod.annotation.prometheus.io/path}"
-        port: "{kubernetes.pod.annotation.prometheus.io/port}"
-        tags:
-          app: "{kubernetes.pod.label.app}"
-```
+Download the sample [Sysdig Agent configuration file](include/sysdig-agent-config.yaml). By default the job will be in the agent so you don't need to change anything but if you don't have it here you have the way to do that
+
 Apply the changes:
 ```bash
 kubectl apply -f sysdig-agent-config.yaml

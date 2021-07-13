@@ -19,10 +19,8 @@ data:
         regex: __HOSTIPS__
       - action: keep
         source_labels:
-        - __meta_kubernetes_namespace
-        - __meta_kubernetes_pod_name
-        separator: '/'
-        regex: 'nginx-namespace/nginx-.+'
+        - __meta_kubernetes_pod_annotation_promcat_sysdig_com_integration_type
+        regex: "nginx"
       - action: replace
         source_labels: [__address__, __meta_kubernetes_pod_annotation_promcat_sysdig_com_port]
         regex: ([^:]+)(?::\d+)?;(\d+)

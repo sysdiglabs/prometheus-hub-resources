@@ -12,8 +12,8 @@ spec:
   template:
     metadata:
       annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "9222"
+        promcat.sysdig.com/port: "9222"
+        promcat.sysdig.com/integration_type: "apache"
       labels:
         app: apache
     spec:

@@ -1,4 +1,8 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdig-agent
+  namespace: sysdig-agent
 data:
   dragent.yaml: |
     new_k8s: true
@@ -35,13 +39,8 @@ data:
         regex: __HOSTIPS__
       - action: keep
         source_labels:
-        - __meta_kubernetes_namespace
-        - __meta_kubernetes_pod_name
-        separator: '/'
-
-        # Add here the namespace/pod-name of your elasticsearch exporter instance
-        regex: 'elastic-namespace/elasticsearch-exporter-.+'
-
+        - __meta_kubernetes_pod_annotation_promcat_sysdig_com_integration_type
+        regex: "elasticsearch"
       - action: replace
         source_labels: [__address__, __meta_kubernetes_pod_annotation_promcat_sysdig_com_port]
         regex: ([^:]+)(?::\d+)?;(\d+)
@@ -65,11 +64,7 @@ data:
       - action: replace
         source_labels: [__meta_kubernetes_pod_container_name]
         target_label: sysdig_k8s_pod_container_name
-
-
-kind: ConfigMap
-metadata:
-    labels:
-      app: sysdig-agent
-    name: sysdig-agent
-    namespace: sysdig-agent
+      metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: (elasticsearch_cluster_health_active_primary_shards|elasticsearch_cluster_health_active_shards|elasticsearch_cluster_health_initializing_shards|elasticsearch_cluster_health_number_of_data_nodes|elasticsearch_cluster_health_number_of_nodes|elasticsearch_cluster_health_number_of_pending_tasks|elasticsearch_cluster_health_relocating_shards|elasticsearch_cluster_health_status|elasticsearch_cluster_health_unassigned_shards|elasticsearch_filesystem_data_available_bytes|elasticsearch_filesystem_data_size_bytes|elasticsearch_indices_indexing_index_time_seconds_total|elasticsearch_indices_indexing_index_total|elasticsearch_indices_merges_total_time_seconds_total|elasticsearch_indices_search_query_time_seconds|elasticsearch_indices_store_throttle_time_seconds_total|elasticsearch_jvm_gc_collection_seconds_count|elasticsearch_jvm_gc_collection_seconds_sum|elasticsearch_jvm_memory_committed_bytes|elasticsearch_jvm_memory_max_bytes|elasticsearch_jvm_memory_max_bytes  |elasticsearch_jvm_memory_pool_peak_used_bytes|elasticsearch_jvm_memory_used_bytes|elasticsearch_os_load1|elasticsearch_os_load15|elasticsearch_os_load5|elasticsearch_process_cpu_percent|elasticsearch_transport_rx_size_bytes_total|elasticsearch_transport_tx_size_bytes_total)
+        action: keep

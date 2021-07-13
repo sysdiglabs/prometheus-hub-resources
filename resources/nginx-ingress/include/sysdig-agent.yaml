@@ -18,14 +18,14 @@ data:
         source_labels: [__meta_kubernetes_pod_host_ip]
         regex: __HOSTIPS__
       - action: keep
+        source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        regex: true
+      - action: keep
         source_labels:
-        - __meta_kubernetes_namespace
-        - __meta_kubernetes_pod_name
-        separator: '/'
-        # Add here the namespace/pod-name of your nginx-ingress exporter instance
-        regex: 'nginx-namespace/nginx-ingress-.+'
+        - __meta_kubernetes_pod_container_name
+        regex: 'controller'
       - action: replace
-        source_labels: [__address__, __meta_kubernetes_pod_annotation_promcat_sysdig_com_port]
+        source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
         regex: ([^:]+)(?::\d+)?;(\d+)
         replacement: $1:$2
         target_label: __address__

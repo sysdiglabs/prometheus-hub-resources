@@ -29,16 +29,6 @@ A file with custom queries for extra metrics can be found in the `custom-metrics
 
 # Sysdig Agent configuration
 
-Ensure that the Sysdig Agent configuration has the following configuration to scrape the containers with Prometheus annotations.
-```yaml
-process_filter:
-  - include:
-      kubernetes.pod.annotation.prometheus.io/scrape: true
-      conf:
-        path: "{kubernetes.pod.annotation.prometheus.io/path}"
-        port: "{kubernetes.pod.annotation.prometheus.io/port}"
-```
-
 You can download the sample configuration file below and apply the changes by:
 ```bash
 kubectl apply -f sysdig-agent-config.yaml

@@ -68,16 +68,14 @@ spec:
     metadata:
       annotations:
         promcat.sysdig.com/port: "9108"
-
         # Add here the namespace, workload type (deployment, statefulset, replicaset, daemonset) 
         # and workload name of the instance that the exporter will take data from
         promcat.sysdig.com/target_ns: elastic-namespace
         promcat.sysdig.com/target_workload_type: statefulset
         promcat.sysdig.com/target_workload_name: elasticsearch
+        promcat.sysdig.com/integration_type: elasticsearch
 ```
 This way, on the Sysdig Monitor, you can view the associated metrics corresponding to the database pods and the exporter.
-
-
 
 After you configure the Sysdig annotations, download the sample configuration file and apply it by:
 ```bash

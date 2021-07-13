@@ -10,7 +10,7 @@ The HAProxy ingress instruments Prometheus metrics on the following scopes:
 - Backend
 - Server (disabled in the configuration provided)
 
-For a complete list of the metrics exported, see the [HAProxy exporter documentation](https://github.com/haproxy/haproxy/blob/master/contrib/prometheus-exporter/README)
+For a complete list of the metrics exported, see the [HAProxy exporter documentation](https://github.com/haproxy/haproxy/blob/master/addons/promex/README)
 
 # Number of time series generated
 Usually, for the configuration provided, the number of time series is approximately:
